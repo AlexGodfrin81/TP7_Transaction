@@ -50,12 +50,15 @@ public class BankingTest {
 
 	@Test
 	public void successfulTransfer() throws Exception {
-		float before0 = myDAO.balanceForCustomer(0);
-		float before1 = myDAO.balanceForCustomer(1);
-		myDAO.bankTransferTransaction(0, 1, 10f);
+		float amount = 10.0f;
+		int fromCustomer = 0;
+		int toCustomer = 1;
+		float before0 = myDAO.balanceForCustomer(fromCustomer);
+		float before1 = myDAO.balanceForCustomer(toCustomer);
+		myDAO.bankTransferTransaction(fromCustomer, toCustomer, amount);
 		// Les balances doivent avoir été mises à jour dans les 2 comptes
-		assertEquals("Balance incorrecte !", before0 - 10.0f, myDAO.balanceForCustomer(0), 0.001f);
-		assertEquals("Balance incorrecte !", before1 + 10.0f, myDAO.balanceForCustomer(1), 0.001f);		
+		assertEquals("Balance incorrecte !", before0 - amount, myDAO.balanceForCustomer(fromCustomer), 0.001f);
+		assertEquals("Balance incorrecte !", before1 + amount, myDAO.balanceForCustomer(toCustomer), 0.001f);				
 	}
 	
 
