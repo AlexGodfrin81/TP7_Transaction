@@ -45,7 +45,7 @@ public class BankingDAO {
 	public void bankTransferTransaction(int fromID, int toID, float amount) throws Exception {
 		if (amount < 0)
 			throw new IllegalArgumentException("Le montant ne doit pas être négatif");
-		// On calcule le résultat
+	
 		String sql = "UPDATE Account SET Total = Total + ? WHERE CustomerID = ?";
 		try (	Connection myConnection = myDataSource.getConnection();
 			PreparedStatement statement = myConnection.prepareStatement(sql)) {
